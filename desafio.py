@@ -25,20 +25,21 @@ LIMITE_SAQUES = 3
 
 while True:
 
-    opcao = input(menu).lower()
+    opcao = input(menu)
 
     if opcao == "d":
-        valor = float(input("- Informe o valor do depósito: R$ "))
+        valor = float(input("Informe o valor do depósito: "))
 
         if valor > 0:
             saldo += valor
+            print(f"Depósito de R$ {valor:.2f} realizado com sucesso !!!")
             extrato += f"Depósito: R$ {valor:.2f}\n"
 
         else:
-            print("Operação Negada! O valor informado é inválido.")
+            print("Operação falhou! O valor informado é inválido.")
 
     elif opcao == "s":
-        valor = float(input("- Informe o valor do saque: R$ "))
+        valor = float(input("Informe o valor do saque: "))
 
         excedeu_saldo = valor > saldo
 
@@ -47,21 +48,22 @@ while True:
         excedeu_saques = numero_saques >= LIMITE_SAQUES
 
         if excedeu_saldo:
-            print("\nOperação Negada! Saldo Insuficiente.")
+            print("Operação falhou! Você não tem saldo suficiente.")
 
         elif excedeu_limite:
-            print("\nSaque Não Realizado! O valor do saque excede o limite(R$ 500,00).")
+            print("Operação falhou! O valor do saque excede o limite.")
 
         elif excedeu_saques:
-            print("\nOperação Não Permitida! Número máximo de saques excedido.(3 saques)")
+            print("Operação falhou! Número máximo de saques excedido.")
 
         elif valor > 0:
             saldo -= valor
-            extrato += f"\nSaque Realizado: R$ {valor:.2f}\n"
+            print(f"Saque de R$ {valor:.2f} realizado com sucesso !!!")
+            extrato += f"Saque: R$ {valor:.2f}\n"
             numero_saques += 1
 
         else:
-            print("\nOperação falhou! O valor informado é inválido.")
+            print("Operação falhou! O valor informado é inválido.")
 
     elif opcao == "e":
         print("\n================ EXTRATO ================")
@@ -73,4 +75,4 @@ while True:
         break
 
     else:
-        print(f"\nCódigo {opcao} inválida! Por favor selecione novamente a opção desejada.")
+        print("Operação inválida, por favor selecione novamente a operação desejada.")
